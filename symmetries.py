@@ -1,6 +1,6 @@
 print("Calculate function compositions in dihedral groups easily and quickly!\nRun shelp() for a brief description of all functions.")
 
-nos, nature = 7, "o"
+nos, nature = 4, "o"
 if nos%2 == 0: nature = "e"
 
 def generate_los(sides):
@@ -24,14 +24,14 @@ def los(sides):
     if sides % 2 == 0: nature = "e"
     if nature == "e":
         for i in range(sides):
-            print("r{0}: Anti clockwise rotation of {0} degrees".format(i*360/sides))
+            print("r{0}: Anti clockwise rotation of {1} degrees".format(i, i*360/sides))
         for i in range(int(sides/2)):
             print("d{0}: Reflection about vertex number {0}".format(i + 1))
         for i in range(int(sides/2)):
             print("f{0}{1}: Reflection about axis between vertices numbered {0} & {1}".format(i + 1, i + 2))
     else:
         for i in range(nos):
-            print("r{0}: Anti clockwise rotation of {0} degrees".format(i*360/sides))
+            print("r{0}: Anti clockwise rotation of {1} degrees".format(i, i*360/sides))
         for i in range(nos):
             print("d{0}: Reflection about vertex number {0}".format(i + 1))
             
@@ -76,7 +76,7 @@ def symmetry(lok, sides = nos):
         print(f"Polygon:\t{polygon}\nSymmetries:\t{los}")
 
 def shelp():
-    print("Dihedral Group Symmetries. The following functions are available:\n--- shelp(): This.\nsymmetry('string', n): where 'string' is the list of symmetries you want to apply (separate them with comma) and 'n' is the number of sides in your polygon.\n--- los(n): Generate the list of valid symmetries for a regular polygon of sides 'n'\n--- ssource(): To get the link of github repo.")
+    print("Dihedral Group Symmetries. The following functions are available:\n--- shelp(): This.\n--- symmetry('string', n): where 'string' is the list of symmetries you want to apply (separate them with comma) and 'n' is the number of sides in your polygon.\n--- los(n): Generate the list of valid symmetries for a regular polygon of sides 'n'\n--- ssource(): To get the link of github repo.")
 
 def ssource():
     print("https://github.com/zplus11/symmetries.git")
