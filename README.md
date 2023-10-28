@@ -4,10 +4,17 @@ Dihedral groups: symmetries of a regular polygon. Calculate composition of funct
 ⚠️ To use the program you need to have Python installed. Download it from [here](https://www.python.org/downloads/).
 
 To use it, clone the repository in your desired directory, then after navigating to the directory, run
-```python```
+
+```
+python```
 to start python. Then run
-```from symmetries import *```
+
+```
+from symmetries import *```
 to install the functions. Run
-```help()```
+
+```
+help()```
+
 to learn about the functions. Thankyou for using!
 
