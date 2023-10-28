@@ -32,7 +32,7 @@ def los(sides):
     else:
         for i in range(sides):
             print("r{0}: Anti clockwise rotation of {1} degrees".format(i, i*360/sides))
-        for i in range(nos):
+        for i in range(sides):
             print("d{0}: Reflection about vertex number {0}".format(i + 1))
             
 def symmetry(lok, sides = nos):
