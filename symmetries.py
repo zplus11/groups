@@ -6,16 +6,16 @@ if nos%2 == 0: nature = "e"
 def generate_los(sides):
     los = []
     if nature == "e":
-        for i in range(nos):
+        for i in range(sides):
             los.append(f"r{i}") # rotation of i*360/n degrees
-        for i in range(int(nos/2)):
+        for i in range(int(sides/2)):
             los.append(f"d{i + 1}") # reflection about vertex number i + 1
-        for i in range(int(nos/2)):
+        for i in range(int(sides/2)):
             los.append(f"f{i + 1}{i + 2}") # reflection about axis between vertices numbered i + 1 & i + 2
     else:
-        for i in range(nos):
+        for i in range(sides):
             los.append(f"r{i}") # rotation of i*360/n degrees
-        for i in range(nos):
+        for i in range(sides):
             los.append(f"d{i + 1}") # rotation about vertex number i + 1
     return los
 
@@ -30,7 +30,7 @@ def los(sides):
         for i in range(int(sides/2)):
             print("f{0}{1}: Reflection about axis between vertices numbered {0} & {1}".format(i + 1, i + 2))
     else:
-        for i in range(nos):
+        for i in range(sides):
             print("r{0}: Anti clockwise rotation of {1} degrees".format(i, i*360/sides))
         for i in range(nos):
             print("d{0}: Reflection about vertex number {0}".format(i + 1))
