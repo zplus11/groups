@@ -7,10 +7,12 @@ To use it, clone the repository in your desired directory, then after navigating
 
 ```
 python```
+
 to start python. Then run
 
 ```
 from symmetries import *```
+
 to install the functions. Run
 
 ```
