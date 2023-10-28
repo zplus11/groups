@@ -19,7 +19,7 @@ from symmetries import *
 to install the functions. Run
 
 ```         
-help()
+shelp()
 ```
 
 to learn about the functions. Thankyou for using!
