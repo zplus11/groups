@@ -5,6 +5,8 @@ if nos%2 == 0: nature = "e"
 
 def generate_los(sides):
     los = []
+    nature = "e"
+    if sides % 2 == 1: nature = "o"
     if nature == "e":
         for i in range(sides):
             los.append(f"r{i}") # rotation of i*360/n degrees
@@ -32,7 +34,7 @@ def los(sides):
     else:
         for i in range(sides):
             print("r{0}: Anti clockwise rotation of {1} degrees".format(i, i*360/sides))
-        for i in range(nos):
+        for i in range(sides):
             print("d{0}: Reflection about vertex number {0}".format(i + 1))
             
 def symmetry(lok, sides = nos):
@@ -44,6 +46,8 @@ def symmetry(lok, sides = nos):
     keys = [element.strip() for element in lok.split(",")]
     keys.reverse()
     print(f"Processing the symmetries in order: {keys}")
+    print(sides)
+    print(los)
     if all(key in los for key in keys):
         for key in keys:
             index = int(key[-1])
@@ -56,18 +60,18 @@ def symmetry(lok, sides = nos):
             elif key.startswith("f"):
                 for j in range(int(sides/2)):
                     temp_vertex = polygon[index + j - 1]
-                    polygon[index + j - 1] = polygon[index - j - 2]
-                    polygon[index - j - 2] = temp_vertex
+                    polygon[(index + j - 1) % sides] = polygon[index - j - 2]
+                    polygon[(index - j - 2) % sides] = temp_vertex
             elif key.startswith("d"):
                 if nature == "e":
                     for j in range(int(sides/2) - 1):
-                        temp_vertex = polygon[index + j]
-                        polygon[index + j] = polygon[index - j - 2]
+                        temp_vertex = polygon[(index + j) % 2]
+                        polygon[(index + j) % sides] = polygon[index - j - 2]
                         polygon[index - j - 2] = temp_vertex
                 else:
                     for j in range(int((sides + 1)/2) - 1):
-                        temp_vertex = polygon[index + j]
-                        polygon[index + j] = polygon[index - j - 2]
+                        temp_vertex = polygon[(index + j) % sides]
+                        polygon[(index + j) % sides] = polygon[index - j - 2]
                         polygon[index - j - 2] = temp_vertex
                 
         print(f"Success. Final image:\nOriginal:\t{original}\nUpdated:\t{polygon}")
