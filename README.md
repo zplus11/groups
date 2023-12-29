@@ -23,7 +23,8 @@ to install the functions.
 `symmetries` comes with a class `polygon` which can be used to define a regular polygon with `n` sides by running
 
 ```
-pol = polygon(n) # replace n by integer > 2```
+pol = polygon(n) # replace n by integer > 2
+```
 
 and which has the following methods:
 - `show()`: to print the polygon in its current shape;
