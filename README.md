@@ -1,36 +1,60 @@
 # symmetries
 
-Dihedral groups: symmetries of a regular polygon. Calculate composition of functions in the group easily.
+Study dihedral group structure easily with python using permutations!
 
-⚠️ To use the program you need to have Python installed. Download it from [here](https://www.python.org/downloads/).
+**Definition** *(Dihedral group)*. A dihedral group of order 2*n* is the set of all "symmetries" of a regular polygon with *n* sides forming a group under their composition.
 
-⚠️ This program is still work in progress. There are bugs and glitches that need to be solved, and there is more to be done overall. It is NOWHERE near its final shape.
+This python library implements the idea of dihedral groups using permutations. A polygon is defined with the following characteristics:
+- its number of sides;
+- its state: the current order of its vertices;
+- its symmetries: rotations union reflections.
 
-To still use it, clone the repository in your desired directory, then after navigating to the directory, run
-
-```         
-python
-```
-
-to start python. Then run
-
-```         
-from symmetries import *
-```
-
-to install the functions.
-
-`symmetries` comes with a class `polygon` which can be used to define a regular polygon with `n` sides by running
+Assuming the current state of a square is `[1, 2, 3, 4]`, then applying 2 unit rotations will make this current state into `[3, 4, 1, 2]`. Similarly other rotations and reflections can be applied. Import the library and define a dihedral group by
 
 ```
-pol = polygon(n) # replace n by integer > 2
+>>> from symmetries import *
+
+>>> d4 = dihedral(sides = 4) # dihedral group of a square's symmetries
 ```
 
-and which has the following methods:
-- `show()`: to print the polygon in its current shape;
-- `list()`: to print a list of symmetries available for the polygon, and instructions to use:
-- `apply(operations)`: to apply the operations `operations` to the polynomial.
+Use the `apply()` method to apply a symmetry to the square and determine its final state. Examples:
 
-`apply()` takes a string argument wherein you provide the operations separated by comma.
+```
+>>> d4.apply(1) # 1 unit rotation
+[4, 1, 2, 3]
 
-Thanks for using!
+>>> d4.apply(1, (0, )) # reflection about axis passing through vertex at 0 index, then a unit rotation
+[4, 3, 2, 1]
+
+>>> d4.apply((1, 2), (1, 2)) # reflection between vertices at indices 1 and 2, applied twice. |(1, 2)| = 2
+[1, 2, 3, 4]
+```
+
+and so on. See a group's subgroups using `subgroups()` method:
+
+```
+>>> d8 = dihedral(8)
+>>> d8_subs = d8.subgroups()
+>>> for subgroup in sorted(d8_subs, key = len):
+...     print(len(subgroup), "\t", subgroup)
+...
+1        [0]
+2        [0, 4]
+2        [0, (0,)]
+2        [0, (1,)]
+2        [0, (2,)]
+2        [0, (3,)]
+2        [0, (0, 1)]
+2        [0, (1, 2)]
+2        [0, (2, 3)]
+2        [0, (3, 4)]
+4        [0, 2, 4, 6]
+4        [0, 4, (0,), (2,)]
+4        [0, 4, (1,), (3,)]
+4        [0, 4, (0, 1), (2, 3)]
+4        [0, 4, (1, 2), (3, 4)]
+8        [0, 1, 2, 3, 4, 5, 6, 7]
+8        [0, 2, 4, 6, (0,), (1,), (2,), (3,)]
+8        [0, 2, 4, 6, (0, 1), (1, 2), (2, 3), (3, 4)]
+16       [0, 1, 2, 3, 4, 5, 6, 7, (0,), (1,), (2,), (3,), (0, 1), (1, 2), (2, 3), (3, 4)]
+```
