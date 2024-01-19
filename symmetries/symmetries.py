@@ -36,9 +36,17 @@ class dihedral:
                     self.state = self.__reflect_from_v(operation)
                 else:
                     self.state = self.__reflect_from_m_to_m(operation)
-        save = self.state
+        reserve = self.state
         self.state = self.__init_pol()
-        return save
+        return reserve
+
+    def determine(self, current_state):
+        result = None
+        for symmetry in self.elements:
+            if self.elements[symmetry] == current_state:
+                result = symmetry
+                break
+        return result
 
     def subgroups(self):
         subgroups = [[0]]
@@ -93,13 +101,3 @@ class dihedral:
             return False
         else:
             return True
-
-    def __determine(self, current_state):
-        result = None
-        for symmetry in self.elements:
-            if self.elements[symmetry] == current_state:
-                result = symmetry
-                break
-        return result
-
-d4 = dihedral(4)
