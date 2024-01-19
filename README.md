@@ -17,9 +17,8 @@ Assuming the current state of a square is `[1, 2, 3, 4]`, then applying 2 unit r
 
 The symmetries are defined in a polygon as follows:
 - rotations of *n* units: denoted by `n`;
-- reflections
- - about vertex at index *n*: denoted by `(n, );
- - about axis passing between vertices at index *n* and *n + 1*: denoted by `(n, n+1)`.
+- reflection about vertex at index *n*: denoted by `(n, )`;
+- reflection about axis passing between vertices at index *n* and *n + 1*: denoted by `(n, n+1)`.
 
 ## Usage
 
