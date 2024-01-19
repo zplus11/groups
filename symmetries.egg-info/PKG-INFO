@@ -1,3 +1,15 @@
+Metadata-Version: 2.1
+Name: symmetries
+Version: 0.0.1
+Summary: Study dihedral groups in python using permutations
+Author: Naman Taggar
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >3.5
+Description-Content-Type: text/markdown
+License-File: LICENSE
+
 # symmetries
 
 ## Introduction
@@ -12,15 +24,6 @@ This python library implements the idea of dihedral groups using permutations. A
 - its symmetries: rotations union reflections.
 
 Assuming the current state of a square is `[1, 2, 3, 4]`, then applying 2 unit rotations will make this current state into `[3, 4, 1, 2]`. Similarly other rotations and reflections can be applied.
-
-## Installation
-To install the package, clone it in your desired directory and run
-
-```
-pip install .
-```
-
-in the root directory.
 
 ## Nomenchlature
 

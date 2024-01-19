@@ -1,0 +1,9 @@
+LICENSE
+README.md
+setup.py
+symmetries/__init__.py
+symmetries/symmetries.py
+symmetries.egg-info/PKG-INFO
+symmetries.egg-info/SOURCES.txt
+symmetries.egg-info/dependency_links.txt
+symmetries.egg-info/top_level.txt
