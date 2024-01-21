@@ -1,4 +1,5 @@
-.git
+.git/
 
 symmetries/__pycache__/
+testing/
 

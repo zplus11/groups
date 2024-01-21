@@ -25,6 +25,9 @@ This python library implements the idea of dihedral groups using permutations. A
 
 Assuming the current state of a square is `[1, 2, 3, 4]`, then applying 2 unit rotations will make this current state into `[3, 4, 1, 2]`. Similarly other rotations and reflections can be applied.
 
+## Installation
+To install the package, 
+
 ## Nomenchlature
 
 The symmetries are defined in a polygon as follows:

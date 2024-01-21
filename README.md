@@ -14,17 +14,11 @@ This python library implements the idea of dihedral groups using permutations. A
 Assuming the current state of a square is `[1, 2, 3, 4]`, then applying 2 unit rotations will make this current state into `[3, 4, 1, 2]`. Similarly other rotations and reflections can be applied.
 
 ## Installation
-To install the package, clone it in your desired directory and run
-
-```
-pip install .
-```
-
-in the root directory.
+To install the package, 
 
 ## Nomenchlature
 
-The symmetries are defined in a polygon as follows:
+The symmetries are named in a polygon as follows:
 - rotations of *n* units: denoted by `n`;
 - reflection about vertex at index *n*: denoted by `(n, )`;
 - reflection about axis passing between vertices at index *n* and *n + 1*: denoted by `(n, n+1)`.
@@ -39,11 +33,9 @@ Import the library and define a dihedral group by
 >>> d4 = dihedral(sides = 4) # dihedral group of a square's symmetries
 ```
 
-Check the state and available symmeries:
+Check the available symmetries:
 
 ```
->>> d4.state
-[1, 2, 3, 4]
 >>> d4.rotations
 [0, 1, 2, 3]
 >>> d4.reflections
@@ -52,7 +44,7 @@ Check the state and available symmeries:
 [0, 1, 2, 3, (0,), (1,), (0, 1), (1, 2)]
 ```
 
-Use the `apply()` method to apply a symmetry to the square and determine its final state. Examples:
+Use the `apply()` method to apply a symmetry to the square and see its final state. Examples:
 
 ```
 >>> d4.apply(1) # 1 unit rotation
