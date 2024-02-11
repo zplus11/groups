@@ -14,7 +14,11 @@ This python library implements the idea of dihedral groups using permutations. A
 Assuming the current state of a square is `[1, 2, 3, 4]`, then applying 2 unit rotations will make this current state into `[3, 4, 1, 2]`. Similarly other rotations and reflections can be applied.
 
 ## Installation
-To install the package, 
+To install the package, run
+
+```
+pip install git+"https://github.com/zplus11/symmetries"
+```
 
 ## Nomenchlature
 
