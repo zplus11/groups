@@ -78,7 +78,7 @@ Use the `apply()` method to apply an operation and see the output. Examples:
 >>> d4.apply((1, 2), (1, 2)) # reflection between vertices at indices 1 and 2, applied twice. |(1, 2)| = 2
 [1, 2, 3, 4]
 
->>> u13 = z(13)
+>>> u13 = u(13)
 >>> u13.apply(3, 8) # 3 * 8 (mod 13)
 11
 ```
@@ -103,16 +103,16 @@ or something more exciting:
 Form EDP's:
 
 ```
->>> edp1 = edp(d24, z10)
->>> len(edp1.members) # this will be len(d24.members)*len(z10.members). 48 times 10 is indeed 480.
+>>> edp1 = edp(d24, u13)
+>>> len(edp1.members) # this will be len(d24.members)*len(u13.members). 48 times 10 is indeed 480.
 480
 ```
 
 and perform component wise operations
 
 ```
->>> edp.apply((2, 3), ((1, ), 2))
-([5, 4, 3, 2, 1, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6], 5)
+>>> edp1.apply((2, 3), ((1, ), 2))
+([5, 4, 3, 2, 1, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6], 6)
 ```
 
 Beautiful!
