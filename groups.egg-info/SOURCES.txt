@@ -1,0 +1,13 @@
+LICENSE
+README.md
+setup.py
+groups/__init__.py
+groups/dihedral.py
+groups/edp.py
+groups/group.py
+groups/u.py
+groups/z.py
+groups.egg-info/PKG-INFO
+groups.egg-info/SOURCES.txt
+groups.egg-info/dependency_links.txt
+groups.egg-info/top_level.txt

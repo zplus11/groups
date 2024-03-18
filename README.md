@@ -1,54 +1,72 @@
-# symmetries
+
+# groups
 
 ## Introduction
 
-Study dihedral group structure easily with python using permutations!
+**Definition** *(Group)*. A group is a non-empty set in Mathematics, elements of which follow 4 properties namely Closure, Associativity, Existence of Identity and Existence of Inverses under a certain operation.
+
+Study group structures easily with python! This library contains various modules related to select group structures in Mathematics, some being `dihedral.py`, `z.py`, `edp.py`, and more. This is a work in continuous progress, and I hope to continue working on this and add many more groups gradually. This README file walks you through the available modules.
+
+## Installation
+To install the library, run
+
+```
+pip install git+"https://github.com/zplus11/groups"
+```
+
+## Available Groups
+
+### Dihedral group
 
 **Definition** *(Dihedral group)*. A dihedral group of order 2*n* is the set of all "symmetries" of a regular polygon with *n* sides forming a group under their composition.
 
-This python library implements the idea of dihedral groups using permutations. A polygon is defined with the following characteristics:
+The `dihedral.py` module implements the idea of dihedral groups using permutations. A polygon is defined with the following characteristics:
 - its number of sides;
 - its state: the current order of its vertices;
 - its symmetries: rotations union reflections.
 
 Assuming the current state of a square is `[1, 2, 3, 4]`, then applying 2 unit rotations will make this current state into `[3, 4, 1, 2]`. Similarly other rotations and reflections can be applied.
 
-## Installation
-To install the package, run
-
-```
-pip install git+"https://github.com/zplus11/symmetries"
-```
-
-## Nomenchlature
-
-The symmetries are named in a polygon as follows:
+**Nomenchlature.** The symmetries are named in a polygon as follows:
 - rotations of *n* units: denoted by `n`;
 - reflection about vertex at index *n*: denoted by `(n, )`;
 - reflection about axis passing between vertices at index *n* and *n + 1*: denoted by `(n, n+1)`.
 
-## Usage
+### Addition modulo *n*
 
-Import the library and define a dihedral group by
+**Definition** *(Z_n)*. *Z_n* is the set {0, 1, ..., n-1} forming a group under addition modulo *n*.
+
+### Multiplication modulo *p*
+
+**Definition** *(U_p)*. *U_p* is the set {0, 1, ..., p-1} forming a group under addition modulo *p*.
+
+### External Direct Products
+
+**Definition** *(EDP)*. An EDP (External Direct Product) is a cross product of two or more groups forming another group under component wise operation.
+
+
+## Library Usage
+
+Import the library by running
 
 ```
->>> from symmetries import *
+>>> from groups import *
+```
 
+and define a group:
+
+```
 >>> d4 = dihedral(sides = 4) # dihedral group of a square's symmetries
 ```
 
-Check the available symmetries:
+Check the available members:
 
 ```
->>> d4.rotations
-[0, 1, 2, 3]
->>> d4.reflections
-[(0,), (1,), (0, 1), (1, 2)]
->>> d4.symmetries
+>>> d4.members
 [0, 1, 2, 3, (0,), (1,), (0, 1), (1, 2)]
 ```
 
-Use the `apply()` method to apply a symmetry to the square and see its final state. Examples:
+Use the `apply()` method to apply an operation and see the output. Examples:
 
 ```
 >>> d4.apply(1) # 1 unit rotation
@@ -59,16 +77,45 @@ Use the `apply()` method to apply a symmetry to the square and see its final sta
 
 >>> d4.apply((1, 2), (1, 2)) # reflection between vertices at indices 1 and 2, applied twice. |(1, 2)| = 2
 [1, 2, 3, 4]
+
+>>> u13 = z(13)
+>>> u13.apply(3, 8) # 3 * 8 (mod 13)
+11
 ```
 
-and so on. Determine the composition of symmetries as follows:
+and so on. Determine the composition of operations as follows:
 
 ```
->>> d3 = dihedral()
+>>> d3 = dihedral() # default sides = 3
 >>> my_sym = d3.apply(2, (0, ))
 >>> d3.determine(my_sym)
 (2,)
 ```
+
+or something more exciting:
+
+```
+>>> d24 = dihedral(24)
+>>> d24.determine(d24.apply((8, 9), 12, (7, ), (11, 12), 3))
+(8, 9)
+```
+
+Form EDP's:
+
+```
+>>> edp1 = edp(d24, z10)
+>>> len(edp1.members) # this will be len(d24.members)*len(z10.members). 48 times 10 is indeed 480.
+480
+```
+
+and perform component wise operations
+
+```
+>>> edp.apply((2, 3), ((1, ), 2))
+([5, 4, 3, 2, 1, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6], 5)
+```
+
+Beautiful!
 
 See a group's subgroups using `subgroups()` method:
 
@@ -109,5 +156,11 @@ True
 >>> d8.check_subgroup([(0,), (1,), (0, 1)])
 False
 ```
+
+## Version Tracker
+
+**0.0.1:** Initial distributable release.
+
+**0.1.0:** Rework the structure and add other groups including EDP.
 
 Thank you for reading this far!
