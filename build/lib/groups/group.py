@@ -1,4 +1,6 @@
 from itertools import combinations
+from functools import lru_cache
+
 
 class group:
     def __init__(self, identity: None):
@@ -14,15 +16,35 @@ class group:
                 break
         return result
 
-    def subgroups(self):
-        subgroups = []
-        sublists_to_check = [sublist for sublist in self.__generate_sublists() if 1 <= len(sublist) <= int(len(self.members)/2)]
-        for sublist in sublists_to_check:
-            if len(self.members) % len(sublist) == 0:
-                if self.check_subgroup(sublist):
-                    subgroups.append(sublist)
-        subgroups.append(self.members)
-        return subgroups
+    def order(self, element):
+        assert element in self.members, f"Invalid element {element}"
+        order = None
+        for i in filter(lambda x: len(self.members) % x == 0, range(1, len(self.members) + 1)):
+            image = self.elements[element]
+            for _ in range(i - 1): image = self.apply(self.determine(image), element)
+            if image == self.identity:
+                order = i
+                break
+        return order
+
+    def inverse(self, element):
+        assert element in self.members, f"Invalid element {element}"
+        inverse = None
+        for opponent in self.members:
+            if self.apply(element, opponent) == self.identity:
+                inverse =  opponent
+                break
+        return inverse
+
+    @lru_cache(maxsize = None)
+    def subgroups(self, order: int = None):
+        assert order is None or type(order) == int, f"Invalid order {order}"
+        first_slice = filter(lambda sublist: 1 <= len(sublist) <= int(len(self.members)/2), self.__generate_sublists())
+        if order is None:
+            sublists_to_check = filter(lambda sublist: len(self.members) % len(sublist) == 0, first_slice)
+        else:
+            sublists_to_check = filter(lambda sublist: len(sublist) == order, first_slice)
+        return list(filter(lambda sublist: self.check_subgroup(sublist), sublists_to_check))
     
     def check_subgroup(self, subset: list):
         if self.identity not in subset:

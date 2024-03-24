@@ -2,7 +2,7 @@ import setuptools
 
 setuptools.setup(
     name = "groups",
-    version = "0.1.0",
+    version = "1.0.0",
     author = "Naman Taggar",
     description = "Study select groups in python",
     long_description = open("README.md").read(),

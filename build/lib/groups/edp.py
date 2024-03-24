@@ -1,5 +1,4 @@
 from .group import group
-
 from itertools import product
 
 

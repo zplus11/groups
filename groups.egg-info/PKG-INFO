@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: groups
-Version: 0.1.0
+Version: 1.0.0
 Summary: Study select groups in python
 Author: Naman Taggar
 Classifier: Programming Language :: Python :: 3
@@ -50,7 +50,7 @@ Assuming the current state of a square is `[1, 2, 3, 4]`, then applying 2 unit r
 
 ### Multiplication modulo *p*
 
-**Definition** *(U_p)*. *U_p* is the set {0, 1, ..., p-1} forming a group under addition modulo *p*.
+**Definition** *(U_n)*. *U_n* is the set {1 <= x < n: gcd(n, x) = 1} forming a group under multiplication modulo *n*.
 
 ### External Direct Products
 
@@ -78,7 +78,7 @@ Check the available members:
 [0, 1, 2, 3, (0,), (1,), (0, 1), (1, 2)]
 ```
 
-Use the `apply()` method to apply an operation and see the output. Examples:
+Use the `apply()` method to apply an operation (or composition thereof) to the identity and see the output. Examples:
 
 ```
 >>> d4.apply(1) # 1 unit rotation
@@ -156,6 +156,19 @@ See a group's subgroups using `subgroups()` method:
 8        [0, 2, 4, 6, (0,), (1,), (2,), (3,)]
 8        [0, 2, 4, 6, (0, 1), (1, 2), (2, 3), (3, 4)]
 16       [0, 1, 2, 3, 4, 5, 6, 7, (0,), (1,), (2,), (3,), (0, 1), (1, 2), (2, 3), (3, 4)]
+>>> [print(subgroup) for subgroup in edp(z(4), u(8)).subgroups(4)]
+...
+[(0, 1), (0, 3), (0, 5), (0, 7)]
+[(0, 1), (0, 3), (2, 1), (2, 3)]
+[(0, 1), (0, 3), (2, 5), (2, 7)]
+[(0, 1), (0, 5), (2, 1), (2, 5)]
+[(0, 1), (0, 5), (2, 3), (2, 7)]
+[(0, 1), (0, 7), (2, 1), (2, 7)]
+[(0, 1), (0, 7), (2, 3), (2, 5)]
+[(0, 1), (1, 1), (2, 1), (3, 1)]
+[(0, 1), (1, 3), (2, 1), (3, 3)]
+[(0, 1), (1, 5), (2, 1), (3, 5)]
+[(0, 1), (1, 7), (2, 1), (3, 7)]
 ```
 
 Or check a certain set is a subgroup or not using `check_subgroup()`:
@@ -168,11 +181,5 @@ True
 >>> d8.check_subgroup([(0,), (1,), (0, 1)])
 False
 ```
-
-## Version Tracker
-
-**0.0.1:** Initial distributable release.
-
-**0.1.0:** Rework the structure and add other groups including EDP.
 
 Thank you for reading this far!

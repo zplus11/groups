@@ -5,14 +5,13 @@ class u(group):
     def __init__(self, n: int = 1):
         assert type(n) == int, "n need be numeric"
         assert n >= 1, "n need be >= 1"
-        assert self.__isprime(n), "n needs to be prime"
 
         self.n = n
 
-        super().__init__(0)
+        super().__init__(1)
         
-        self.members += list(range(n))
-        self.elements = {i: i % n for i in range(n)}
+        self.members += list(filter(self.__iscoprime, range(n)))
+        self.elements = {i: i for i in range(self.n)}
 
     def apply(self, *args):
         for operation in args:
@@ -20,11 +19,12 @@ class u(group):
 
         return self.__product([operation for operation in args[::-1]]) % self.n
 
-    def __isprime(self, number):
-        for i in range(2, int(number/2) + 1):
-            if number % i == 0:
-                return False
-        return True
+    def __iscoprime(self, number):
+        p = self.n
+        while number != 0:
+            p, number = number, p % number
+        if p == 1: return True
+        else: return False
 
     def __product(self, l):
         p = 1
