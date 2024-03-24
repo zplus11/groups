@@ -122,6 +122,7 @@ Beautiful! Find inverses or orders of group elements:
 11
 >>> edp1.inverse(element = ((5, ), 5))
 ((5,), 8)
+```
 
 
 See a group's subgroups using `subgroups()` method:
