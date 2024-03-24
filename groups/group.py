@@ -31,7 +31,7 @@ class group:
         assert element in self.members, f"Invalid element {element}"
         inverse = None
         for opponent in self.members:
-            if self.apply(element, opponent) == self.identity:
+            if self.apply(element, opponent) == self.elements[self.identity]:
                 inverse =  opponent
                 break
         return inverse

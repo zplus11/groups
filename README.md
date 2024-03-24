@@ -115,7 +115,14 @@ and perform component wise operations
 ([5, 4, 3, 2, 1, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6], 6)
 ```
 
-Beautiful!
+Beautiful! Find inverses or orders of group elements:
+
+```
+>>> d24.inverse(element = 13) # inverse of element "13" in d24
+11
+>>> edp1.inverse(element = ((5, ), 5))
+((5,), 8)
+
 
 See a group's subgroups using `subgroups()` method:
 
