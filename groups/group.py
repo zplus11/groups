@@ -22,7 +22,7 @@ class group:
         for i in filter(lambda x: len(self.members) % x == 0, range(1, len(self.members) + 1)):
             image = self.elements[element]
             for _ in range(i - 1): image = self.apply(self.determine(image), element)
-            if image == self.identity:
+            if image == self.elements[self.identity]:
                 order = i
                 break
         return order
