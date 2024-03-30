@@ -11,3 +11,6 @@
 #### v1.0.0
 - Stable release after some optimisation
 - Fixed some theory errors
+
+#### v1.1.0
+- Add `k4.py`, `q8.py`

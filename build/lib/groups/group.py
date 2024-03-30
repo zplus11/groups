@@ -1,7 +1,6 @@
 from itertools import combinations
 from functools import lru_cache
 
-
 class group:
     def __init__(self, identity: None):
         self.members = []
@@ -22,7 +21,7 @@ class group:
         for i in filter(lambda x: len(self.members) % x == 0, range(1, len(self.members) + 1)):
             image = self.elements[element]
             for _ in range(i - 1): image = self.apply(self.determine(image), element)
-            if image == self.elements[self.identity]:
+            if image == self.identity:
                 order = i
                 break
         return order
@@ -39,23 +38,37 @@ class group:
     @lru_cache(maxsize = None)
     def subgroups(self, order: int = None):
         assert order is None or type(order) == int, f"Invalid order {order}"
-        first_slice = filter(lambda sublist: 1 <= len(sublist) <= int(len(self.members)/2), self.__generate_sublists())
-        if order is None:
-            sublists_to_check = filter(lambda sublist: len(self.members) % len(sublist) == 0, first_slice)
-        else:
-            sublists_to_check = filter(lambda sublist: len(sublist) == order, first_slice)
-        return list(filter(lambda sublist: self.check_subgroup(sublist), sublists_to_check))
+        sublists = self.__generate_sublists()
+        if order is not None:
+            sublists = filter(lambda sublist: len(sublist) == order, sublists)
+        return list(filter(lambda sublist: self.check_subgroup(sublist), sublists))
     
     def check_subgroup(self, subset: list):
         if self.identity not in subset:
             return False
-        elif any(i not in self.members for i in subset):
+        if any(i not in self.members for i in subset):
             return False
-        elif any(self.determine(self.apply(i, j)) not in subset for i in subset for j in subset):
+        if any(self.determine(self.apply(i, j)) not in subset for i in subset for j in subset):
             return False
-        else:
-            return True
+        return True
 
     def __generate_sublists(self):
-        sublists = [list(c) for r in range(len(self.members) + 1) for c in combinations(self.members, r)]
+        sublists = list(filter(
+            lambda sublist: len(self.members) % len(sublist) == 0,
+            [list(c) for r in range(1, len(self.members) + 1) for c in combinations(self.members, r)]
+        ))
         return sublists
+
+    def abelian(self):
+        if any(self.apply(a, b) != self.apply(b, a) for a in self.members for b in self.members):
+            return False
+        return True
+
+    def cyclic(self, echo = False):
+        gorder = len(self.members)
+        for a in self.members:
+            if self.order(a) == gorder:
+                if echo == True:
+                    print("Generator found:", a)
+                return True
+        return False

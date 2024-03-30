@@ -1,5 +1,5 @@
 
-# groups
+# groups v1.1.0
 
 ## Introduction
 
@@ -34,11 +34,13 @@ Assuming the current state of a square is `[1, 2, 3, 4]`, then applying 2 unit r
 
 ### Addition modulo *n*
 
-**Definition** *(Z_n)*. *Z_n* is the set {0, 1, ..., n-1} forming a group under addition modulo *n*.
+**Definition** <div class="tex2jax">$(Z_n)$</div>. <div class="tex2jax">$(Z_n)$</div> is the set <div class="tex2jax">$\{0, 1, \ldots, n-1\}$</div> forming a group under addition modulo <div class="tex2jax">$n$</div>.
 
 ### Multiplication modulo *p*
 
-**Definition** *(U_n)*. *U_n* is the set {1 <= x < n: gcd(n, x) = 1} forming a group under multiplication modulo *n*.
+**Definition** <div class="tex2jax">$(U_n)$</div>. <div class="tex2jax">$U_n$</div> is the set <div class="tex2jax">$\{1 \le x < n: \gcd(n, x) = 1\}$</div> forming a group under multiplication modulo <div class="tex2jax">$n$</div>.
+
+### <div class="tex2jax">$K_4$</div> and <div class="tex2jax">$Q_8$</div>
 
 ### External Direct Products
 
@@ -122,7 +124,6 @@ Beautiful! Find inverses or orders of group elements:
 11
 >>> edp1.inverse(element = ((5, ), 5))
 ((5,), 8)
-<<<<<<< HEAD
 >>> u(1000).order(883)
 100
 >>> d24.order((7, 8))
@@ -169,6 +170,8 @@ See a group's subgroups using `subgroups()` method:
 [(0, 1), (1, 3), (2, 1), (3, 3)]
 [(0, 1), (1, 5), (2, 1), (3, 5)]
 [(0, 1), (1, 7), (2, 1), (3, 7)]
+>>> len(edp(k4(), k4()).subgroups())
+67
 ```
 
 Or check a certain set is a subgroup or not using `check_subgroup()`:
@@ -183,3 +186,8 @@ False
 ```
 
 Thank you for reading this far!
+
+---
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>

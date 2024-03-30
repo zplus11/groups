@@ -5,6 +5,8 @@ groups/__init__.py
 groups/dihedral.py
 groups/edp.py
 groups/group.py
+groups/k4.py
+groups/q8.py
 groups/u.py
 groups/z.py
 groups.egg-info/PKG-INFO
