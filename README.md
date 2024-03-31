@@ -3,6 +3,8 @@
 
 ## Introduction
 
+`groups` is a basic Computer Algebra System to study various Mathematical group structures from Group Theory.
+
 **Definition** *(Group)*. A group is a non-empty set in Mathematics, elements of which follow 4 properties namely Closure, Associativity, Existence of Identity and Existence of Inverses under a certain operation.
 
 Study group structures easily with python! This library contains various modules related to select group structures in Mathematics, some being `dihedral.py`, `z.py`, `edp.py`, and more. This is a work in continuous progress, and I hope to continue working on this and add many more groups gradually. This README file walks you through the available modules.
@@ -34,13 +36,13 @@ Assuming the current state of a square is `[1, 2, 3, 4]`, then applying 2 unit r
 
 ### Addition modulo *n*
 
-**Definition** (Z_n). (Z_n) is the set {0, 1, ..., n-1} forming a group under addition modulo n.
+**Definition** (*Z*<sub><i>n</i></sub>). *Z*<sub><i>n</i></sub> is the set {0, 1, ..., *n*-1} forming a group under addition modulo *n*.
 
-### Multiplication modulo *p*
+### Multiplication modulo *n*
 
-**Definition** (U_n). U_n is the set {1 <= x < n: gcd(n, x) = 1} forming a group under multiplication modulo n.
+**Definition** (*U*<sub><i>n</i></sub>). *U*<sub><i>n</i></sub> is the set {1 <= *x* < *n*: gcd(*n*, *x*) = 1} forming a group under multiplication modulo *n*.
 
-### K_4 and Q_8
+### (*K*<sub>4</sub>) and (*Q*<sub>8</sub>)
 
 ### External Direct Products
 
@@ -51,35 +53,32 @@ Assuming the current state of a square is `[1, 2, 3, 4]`, then applying 2 unit r
 
 Import the library by running
 
-```
+```python
 >>> from groups import *
 ```
 
 and define a group:
 
-```
+```python
 >>> d4 = dihedral(sides = 4) # dihedral group of a square's symmetries
 ```
 
 Check the available members:
 
-```
+```python
 >>> d4.members
 [0, 1, 2, 3, (0,), (1,), (0, 1), (1, 2)]
 ```
 
 Use the `apply()` method to apply an operation (or composition thereof) to the identity and see the output. Examples:
 
-```
+```python
 >>> d4.apply(1) # 1 unit rotation
 [4, 1, 2, 3]
-
 >>> d4.apply(1, (0, )) # reflection about axis passing through vertex at 0 index, then a unit rotation
 [4, 3, 2, 1]
-
 >>> d4.apply((1, 2), (1, 2)) # reflection between vertices at indices 1 and 2, applied twice. |(1, 2)| = 2
 [1, 2, 3, 4]
-
 >>> u13 = u(13)
 >>> u13.apply(3, 8) # 3 * 8 (mod 13)
 11
@@ -87,7 +86,7 @@ Use the `apply()` method to apply an operation (or composition thereof) to the i
 
 and so on. Determine the composition of operations as follows:
 
-```
+```python
 >>> d3 = dihedral() # default sides = 3
 >>> my_sym = d3.apply(2, (0, ))
 >>> d3.determine(my_sym)
@@ -96,15 +95,15 @@ and so on. Determine the composition of operations as follows:
 
 or something more exciting:
 
-```
+```python
 >>> d24 = dihedral(24)
 >>> d24.determine(d24.apply((8, 9), 12, (7, ), (11, 12), 3))
 (8, 9)
 ```
 
-Form EDP's:
+Form EDPs:
 
-```
+```python
 >>> edp1 = edp(d24, u13)
 >>> len(edp1.members) # this will be len(d24.members)*len(u13.members). 48 times 10 is indeed 480.
 480
@@ -112,14 +111,14 @@ Form EDP's:
 
 and perform component wise operations
 
-```
+```python
 >>> edp1.apply((2, 3), ((1, ), 2))
 ([5, 4, 3, 2, 1, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6], 6)
 ```
 
 Beautiful! Find inverses or orders of group elements:
 
-```
+```python
 >>> d24.inverse(element = 13) # inverse of element "13" in d24
 11
 >>> edp1.inverse(element = ((5, ), 5))
@@ -132,9 +131,9 @@ Beautiful! Find inverses or orders of group elements:
 
 See a group's subgroups using `subgroups()` method:
 
-```
+```python
 >>> d8 = dihedral(8)
->>> d8_subs = d8.subgroups()
+>>> d8_subs = d8.subgroups() # of all orders
 >>> for subgroup in sorted(d8_subs, key = len):
 ...     print(len(subgroup), "\t", subgroup)
 ...
@@ -157,7 +156,7 @@ See a group's subgroups using `subgroups()` method:
 8        [0, 2, 4, 6, (0,), (1,), (2,), (3,)]
 8        [0, 2, 4, 6, (0, 1), (1, 2), (2, 3), (3, 4)]
 16       [0, 1, 2, 3, 4, 5, 6, 7, (0,), (1,), (2,), (3,), (0, 1), (1, 2), (2, 3), (3, 4)]
->>> [print(subgroup) for subgroup in edp(z(4), u(8)).subgroups(4)]
+>>> [print(subgroup) for subgroup in edp(z(4), u(8)).subgroups(order = 4)]
 ...
 [(0, 1), (0, 3), (0, 5), (0, 7)]
 [(0, 1), (0, 3), (2, 1), (2, 3)]
@@ -176,12 +175,12 @@ See a group's subgroups using `subgroups()` method:
 
 Or check a certain set is a subgroup or not using `check_subgroup()`:
 
-```
+```python
 >>> d8.check_subgroup([0])
 True
 >>> d8.check_subgroup([0, (0, )])
 True
->>> d8.check_subgroup([(0,), (1,), (0, 1)])
+>>> d8.check_subgroup([(0, ), (1, ), (0, 1)])
 False
 ```
 

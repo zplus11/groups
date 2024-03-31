@@ -1,6 +1,7 @@
 from itertools import combinations
 from functools import lru_cache
 
+
 class group:
     def __init__(self, identity: None):
         self.members = []
@@ -38,10 +39,8 @@ class group:
     @lru_cache(maxsize = None)
     def subgroups(self, order: int = None):
         assert order is None or type(order) == int, f"Invalid order {order}"
-        sublists = self.__generate_sublists()
-        if order is not None:
-            sublists = filter(lambda sublist: len(sublist) == order, sublists)
-        return list(filter(lambda sublist: self.check_subgroup(sublist), sublists))
+        sublists = self.__generate_sublists(o = order)
+        return list(list(a) for a in filter(lambda sublist: self.check_subgroup(sublist), sublists))
     
     def check_subgroup(self, subset: list):
         if self.identity not in subset:
@@ -52,10 +51,11 @@ class group:
             return False
         return True
 
-    def __generate_sublists(self):
+    def __generate_sublists(self, o = None):
         sublists = list(filter(
             lambda sublist: len(self.members) % len(sublist) == 0,
-            [list(c) for r in range(1, len(self.members) + 1) for c in combinations(self.members, r)]
+            [list(c) for r in range(1, len(self.members) + 1) for c in combinations(self.members, r)
+             if (o is None or len(c) == o)]
         ))
         return sublists
 
