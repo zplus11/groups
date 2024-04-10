@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: groups
-Version: 1.1.0
+Version: 1.1.1
 Summary: Study select groups in python
 Author: Naman Taggar
 Classifier: Programming Language :: Python :: 3
@@ -88,7 +88,7 @@ Use the `apply()` method to apply an operation (or composition thereof) to the i
 >>> d4.apply(1) # 1 unit rotation
 [4, 1, 2, 3]
 >>> d4.apply(1, (0, )) # reflection about axis passing through vertex at 0 index, then a unit rotation
-[4, 3, 2, 1]
+[2, 1, 4, 3]
 >>> d4.apply((1, 2), (1, 2)) # reflection between vertices at indices 1 and 2, applied twice. |(1, 2)| = 2
 [1, 2, 3, 4]
 >>> u13 = u(13)
@@ -100,7 +100,7 @@ and so on. Determine the composition of operations as follows:
 
 ```python
 >>> d3 = dihedral() # default sides = 3
->>> my_sym = d3.apply(2, (0, ))
+>>> my_sym = d3.apply((0, ), 2)
 >>> d3.determine(my_sym)
 (2,)
 ```
@@ -110,15 +110,15 @@ or something more exciting:
 ```python
 >>> d24 = dihedral(24)
 >>> d24.determine(d24.apply((8, 9), 12, (7, ), (11, 12), 3))
-(8, 9)
+(5, 6)
 ```
 
 Form EDPs:
 
 ```python
 >>> edp1 = edp(d24, u13)
->>> len(edp1.members) # this will be len(d24.members)*len(u13.members). 48 times 10 is indeed 480.
-480
+>>> len(edp1.members) # this will be len(d24.members)*len(u13.members).
+576
 ```
 
 and perform component wise operations
