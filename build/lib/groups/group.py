@@ -59,16 +59,25 @@ class group:
         ))
         return sublists
 
-    def abelian(self):
-        if any(self.apply(a, b) != self.apply(b, a) for a in self.members for b in self.members):
+    def abelian(self, sub = None):
+        members = self.members
+        if sub is not None:
+            assert type(sub) == list
+            members = sub
+            for member in members:
+                assert member in self.members, f"Invalid subgroup element {member}"
+        if any(self.apply(a, b) != self.apply(b, a) for a in members for b in members):
             return False
         return True
 
-    def cyclic(self, echo = False):
-        gorder = len(self.members)
-        for a in self.members:
-            if self.order(a) == gorder:
-                if echo == True:
-                    print("Generator found:", a)
+    def cyclic(self, sub = None):
+        members = self.members
+        if sub is not None:
+            assert type(sub) == list
+            members = sub
+            for member in members:
+                assert member in self.members, f"Invalid subgroup element {member}"
+        for a in members:
+            if self.order(a) == len(members):
                 return True
         return False

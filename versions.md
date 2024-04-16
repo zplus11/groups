@@ -22,3 +22,6 @@ Restructured a lot of things, shifting general methods such as `subgroups()` or 
 - Add `k4.py`, `q8.py`
 
 **v1.1.1 (10 Apr, 2024):** Minor bug fixes.
+
+#### v1.2.0 (16 Apr, 2024)
+- Add ability to check nature of subgroups of the group: cyclic/abelian

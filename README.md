@@ -1,5 +1,5 @@
 
-# groups v1.1.0
+# groups v1.2.0
 
 ## Introduction
 
@@ -173,7 +173,22 @@ See a group's subgroups using `subgroups()` method:
 67
 ```
 
-Or check a certain set is a subgroup or not using `check_subgroup()`:
+List the cyclic subgroups of U<sub>30</sub> (see [this](https://math.stackexchange.com/questions/3390079/systematically-list-the-cyclic-subgroups-of-u30)):
+
+```python
+>>> u30s = u(30).subgroups()
+>>> for i in u30s:
+...     if u(30).cyclic(i): print(i)
+...
+[1]
+[1, 11]
+[1, 19]
+[1, 29]
+[1, 7, 13, 19]
+[1, 17, 19, 23]
+```
+
+Check a certain set is a subgroup or not using `check_subgroup()`:
 
 ```python
 >>> d8.check_subgroup([0])
