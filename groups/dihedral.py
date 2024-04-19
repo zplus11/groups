@@ -27,7 +27,7 @@ class dihedral(group):
         for operation in operations:
             assert operation in self.members, f"Invalid operation: {operation}"
 
-        self.__state = self.__init_pol()
+        self.__state = [k+1 for k in range(self.sides)] # ... :(
         for operation in operations[::-1]:
             if type(operation) == int:
                 self.__state = self.__rotate(operation)
@@ -36,9 +36,7 @@ class dihedral(group):
                     self.__state = self.__reflect_from_v(operation)
                 else:
                     self.__state = self.__reflect_from_m_to_m(operation)
-        reserve = self.__state
-        self.__state = self.__init_pol()
-        return reserve
+        return self.__state
 
     def __rotate(self, degree: int = 0):
         temp = self.__temp()
@@ -67,6 +65,3 @@ class dihedral(group):
         
     def __temp(self):
         return self.__state.copy()
-
-    def __init_pol(self):
-        return [k + 1 for k in range(self.sides)]

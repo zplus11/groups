@@ -18,7 +18,7 @@ class k4(group):
         for operation in args:
             assert operation in self.members, f"Invalid operation: {operation}"
 
-        result = "e"
+        result = self.elements[self.identity]
         for x in args[::-1]:
             result = self.operations_table[result][x]
         return result
