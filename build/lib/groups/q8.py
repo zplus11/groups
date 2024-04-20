@@ -22,7 +22,7 @@ class q8(group):
         for operation in args:
             assert operation in self.members, f"Invalid operation: {operation}"
 
-        result = self.elements[self.identity]
+        result = "1"
         for x in args[::-1]:
             result = self.operations_table[result][x]
         return result
