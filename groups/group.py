@@ -20,8 +20,7 @@ class group:
         assert element in self.members, f"Invalid element {element}"
         order = None
         for i in filter(lambda x: len(self.members) % x == 0, range(1, len(self.members) + 1)):
-            image = self.elements[element]
-            for _ in range(i - 1): image = self.apply(self.determine(image), element)
+            image = self.apply(*[element for i in range(i)])
             if image == self.elements[self.identity]:
                 order = i
                 break

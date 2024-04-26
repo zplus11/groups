@@ -1,4 +1,3 @@
-
 # groups v1.2.0
 
 ## Introduction
@@ -10,6 +9,7 @@
 Study group structures easily with python! This library contains various modules related to select group structures in Mathematics, some being `dihedral.py`, `z.py`, `edp.py`, and more. This is a work in continuous progress, and I hope to continue working on this and add many more groups gradually. This README file walks you through the available modules.
 
 ## Installation
+
 To install the library, run
 
 ```
@@ -18,9 +18,18 @@ pip install git+"https://github.com/zplus11/groups"
 
 ## Available Groups
 
-### Dihedral group
+`groups` offers the following Groups:
 
-**Definition** *(Dihedral group)*. A dihedral group of order 2*n* is the set of all "symmetries" of a regular polygon with *n* sides forming a group under their composition.
+|Group|Class|Identity|Description|
+|-|-|-|------------|
+|Dihedral|`dihedral(sides = 3)`|`[0]`|D<sub>n</sub> is the group of symmetries of a regular polygon. Polygon images (order of vertices) are stored in list forms, such as a square would be `[1, 2, 3, 4]` and these lists are manipulated upon application of symmetries. See Note <1> below.|
+|Addition modulo *n*|`z(n = 1)`|`0`|*Z*<sub>n</sub> is the group {0, 1, ..., *n*-1} formed under addition modulo *n*.|
+|Multiplication modulo *n*|`u(n = 1)`|`1`|*U*<sub>n</sub> is the group {1 <= *x* < *n* : gcd(*n*, *x*) = 1} formed under multiplication modulo *n*.|
+|*K*<sub>4</sub>|`k4()`|`"e"`|Klein's 4 group.|
+|*Q*<sub>8</sub>|`q8()`|`"1"`|Quaternion group.|
+|EDP|`edp(g1(), g2(), ..., gn())`|Identity tuple|External Direct Product of groups.|
+
+### Note <1>
 
 The `dihedral.py` module implements the idea of dihedral groups using permutations. A polygon is defined with the following characteristics:
 - its number of sides;
@@ -34,22 +43,9 @@ Assuming the current state of a square is `[1, 2, 3, 4]`, then applying 2 unit r
 - reflection about vertex at index *n*: denoted by `(n, )`;
 - reflection about axis passing between vertices at index *n* and *n + 1*: denoted by `(n, n+1)`.
 
-### Addition modulo *n*
-
-**Definition** (*Z*<sub><i>n</i></sub>). *Z*<sub><i>n</i></sub> is the set {0, 1, ..., *n*-1} forming a group under addition modulo *n*.
-
-### Multiplication modulo *n*
-
-**Definition** (*U*<sub><i>n</i></sub>). *U*<sub><i>n</i></sub> is the set {1 <= *x* < *n*: gcd(*n*, *x*) = 1} forming a group under multiplication modulo *n*.
-
-### (*K*<sub>4</sub>) and (*Q*<sub>8</sub>)
-
-### External Direct Products
-
-**Definition** *(EDP)*. An EDP (External Direct Product) is a cross product of two or more groups forming another group under component wise operation.
-
-
 ## Library Usage
+
+#### Introduction
 
 Import the library by running
 
@@ -70,6 +66,8 @@ Check the available members:
 [0, 1, 2, 3, (0,), (1,), (0, 1), (1, 2)]
 ```
 
+#### Applying operations
+
 Use the `apply()` method to apply an operation (or composition thereof) to the identity and see the output. Examples:
 
 ```python
@@ -87,10 +85,10 @@ Use the `apply()` method to apply an operation (or composition thereof) to the i
 and so on. Determine the composition of operations as follows:
 
 ```python
->>> d3 = dihedral() # default sides = 3
->>> my_sym = d3.apply((0, ), 2)
->>> d3.determine(my_sym)
-(2,)
+>>> u10 = u(10)
+>>> composed = u10.apply(3, 7)
+>>> u10.determine(composed)
+1
 ```
 
 or something more exciting:
@@ -101,33 +99,41 @@ or something more exciting:
 (5, 6)
 ```
 
-Form EDPs:
+#### Forming EDPs
+
+Form External Direct Products:
 
 ```python
->>> edp1 = edp(d24, u13)
->>> len(edp1.members) # this will be len(d24.members)*len(u13.members).
-576
+>>> edp1 = edp(z(12), u(20))
+>>> len(edp1.members) # = 12 * 8
+96
 ```
 
 and perform component wise operations
 
 ```python
->>> edp1.apply((2, 3), ((1, ), 2))
-([5, 4, 3, 2, 1, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6], 6)
+>>> edp1.apply((5, 3), (8, 19))
+(1, 17)
 ```
 
-Beautiful! Find inverses or orders of group elements:
+Beautiful!
+
+#### Orders & Inverses
+
+Find inverses or orders of group elements:
 
 ```python
->>> d24.inverse(element = 13) # inverse of element "13" in d24
+>>> dihedral(24).inverse(element = 13) # inverse of element "13" in d24
 11
->>> edp1.inverse(element = ((5, ), 5))
-((5,), 8)
+>>> edp1.inverse(element = (5, 7))
+(7, 3)
 >>> u(1000).order(883)
 100
->>> d24.order((7, 8))
+>>> dihedral(20).order((7, 8))
 2
 ```
+
+#### Subgroups
 
 See a group's subgroups using `subgroups()` method:
 
@@ -156,6 +162,11 @@ See a group's subgroups using `subgroups()` method:
 8        [0, 2, 4, 6, (0,), (1,), (2,), (3,)]
 8        [0, 2, 4, 6, (0, 1), (1, 2), (2, 3), (3, 4)]
 16       [0, 1, 2, 3, 4, 5, 6, 7, (0,), (1,), (2,), (3,), (0, 1), (1, 2), (2, 3), (3, 4)]
+```
+
+Find subgroups of certain order:
+
+```python
 >>> [print(subgroup) for subgroup in edp(z(4), u(8)).subgroups(order = 4)]
 ...
 [(0, 1), (0, 3), (0, 5), (0, 7)]
@@ -169,6 +180,11 @@ See a group's subgroups using `subgroups()` method:
 [(0, 1), (1, 3), (2, 1), (3, 3)]
 [(0, 1), (1, 5), (2, 1), (3, 5)]
 [(0, 1), (1, 7), (2, 1), (3, 7)]
+```
+
+Subgroups of EDP of `k4()` and `k4()`:
+
+```python
 >>> len(edp(k4(), k4()).subgroups())
 67
 ```
@@ -191,11 +207,9 @@ List the cyclic subgroups of U<sub>30</sub> (see [this](https://math.stackexchan
 Check a certain set is a subgroup or not using `check_subgroup()`:
 
 ```python
->>> d8.check_subgroup([0])
+>>> dihedral(8).check_subgroup([0])
 True
->>> d8.check_subgroup([0, (0, )])
-True
->>> d8.check_subgroup([(0, ), (1, ), (0, 1)])
+>>> u(10).check_subgroup([3, 7])
 False
 ```
 
