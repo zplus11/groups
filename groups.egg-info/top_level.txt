@@ -1,5 +1,1 @@
-dihedral
-edp
 groups
-u
-z

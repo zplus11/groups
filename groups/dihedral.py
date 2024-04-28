@@ -8,26 +8,24 @@ class dihedral(group):
 
         self.sides = sides
         self.__state = [i + 1 for i in range(self.sides)]
-        self.rotations = [i for i in range(self.sides)]
         self.nature = self.sides % 2 == 0
-
-        self.reflections = []
-        if self.nature:
-            self.reflections += [(i,) for i in range(int(self.sides/2))]
-            self.reflections += [(i, i + 1) for i in range(int(self.sides/2))]
-        else:
-            self.reflections += [(i,) for i in range(self.sides)]
 
         super().__init__(0)
 
-        self.members += self.rotations + self.reflections
+        self.members = [i for i in range(self.sides)]
+        if self.nature:
+            self.members += [(i,) for i in range(int(self.sides/2))]
+            self.members += [(i, i + 1) for i in range(int(self.sides/2))]
+        else:
+            self.members += [(i,) for i in range(self.sides)]
+
         self.elements = {symmetry: self.apply(symmetry) for symmetry in self.members}
         
     def apply(self, *operations):
         for operation in operations:
             assert operation in self.members, f"Invalid operation: {operation}"
 
-        self.__state = [k+1 for k in range(self.sides)] # ... :(
+        self.__state = [k+1 for k in range(self.sides)]
         for operation in operations[::-1]:
             if type(operation) == int:
                 self.__state = self.__rotate(operation)

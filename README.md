@@ -1,4 +1,4 @@
-# groups v1.2.0
+# groups v1.3.0
 
 ## Introduction
 
@@ -104,16 +104,16 @@ or something more exciting:
 Form External Direct Products:
 
 ```python
->>> edp1 = edp(z(12), u(20))
->>> len(edp1.members) # = 12 * 8
+>>> edp1 = edp(z(12), u(20), q8())
+>>> len(edp1.members) # = 12 * 8 * 8
 96
 ```
 
 and perform component wise operations
 
 ```python
->>> edp1.apply((5, 3), (8, 19))
-(1, 17)
+>>> edp1.apply((5, 3, "-j"), (8, 19, "k"))
+(1, 17, 'i')
 ```
 
 Beautiful!
@@ -125,12 +125,60 @@ Find inverses or orders of group elements:
 ```python
 >>> dihedral(24).inverse(element = 13) # inverse of element "13" in d24
 11
->>> edp1.inverse(element = (5, 7))
-(7, 3)
+>>> edp1.inverse(element = (5, 7, "-i"))
+(7, 3, 'i')
 >>> u(1000).order(883)
 100
 >>> dihedral(20).order((7, 8))
 2
+```
+
+Printing table of orders and inverses:
+
+```python
+>>> d6 = dihedral(6)
+>>> print("x", "\t", "|x|", "\t", "x^(-1)")
+... for i in d6.members:
+...     print(i, "\t", d6.order(i), "\t", d6.inverse(i))
+...
+"x"	"|x|"	"x^(-1)"
+0        1       0
+1        6       5
+2        3       4
+3        2       3
+4        3       2
+5        6       1
+(0,)     2       (0,)
+(1,)     2       (1,)
+(2,)     2       (2,)
+(0, 1)   2       (0, 1)
+(1, 2)   2       (1, 2)
+(2, 3)   2       (2, 3)
+```
+
+#### Cayley Table
+
+```python
+>>> q8().cayley()
+0 = 1
+1 = -1
+2 = i
+3 = -i
+4 = j
+5 = -j
+6 = k
+7 = -k
+----------------------------------
+   | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7
+
+0  | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7
+1  | 1 | 0 | 3 | 2 | 5 | 4 | 7 | 6
+2  | 2 | 3 | 1 | 0 | 7 | 6 | 4 | 5
+3  | 3 | 2 | 0 | 1 | 6 | 7 | 5 | 4
+4  | 4 | 5 | 6 | 7 | 1 | 0 | 3 | 2
+5  | 5 | 4 | 7 | 6 | 0 | 1 | 2 | 3
+6  | 6 | 7 | 5 | 4 | 2 | 3 | 1 | 0
+7  | 7 | 6 | 4 | 5 | 3 | 2 | 0 | 1
 ```
 
 #### Subgroups
@@ -139,54 +187,29 @@ See a group's subgroups using `subgroups()` method:
 
 ```python
 >>> d8 = dihedral(8)
->>> d8_subs = d8.subgroups() # of all orders
+>>> d8_subs = d8.subgroups()
 >>> for subgroup in sorted(d8_subs, key = len):
 ...     print(len(subgroup), "\t", subgroup)
 ...
-1        [0]
-2        [0, 4]
-2        [0, (0,)]
-2        [0, (1,)]
-2        [0, (2,)]
-2        [0, (3,)]
-2        [0, (0, 1)]
-2        [0, (1, 2)]
-2        [0, (2, 3)]
-2        [0, (3, 4)]
-4        [0, 2, 4, 6]
-4        [0, 4, (0,), (2,)]
-4        [0, 4, (1,), (3,)]
-4        [0, 4, (0, 1), (2, 3)]
-4        [0, 4, (1, 2), (3, 4)]
-8        [0, 1, 2, 3, 4, 5, 6, 7]
-8        [0, 2, 4, 6, (0,), (1,), (2,), (3,)]
-8        [0, 2, 4, 6, (0, 1), (1, 2), (2, 3), (3, 4)]
-16       [0, 1, 2, 3, 4, 5, 6, 7, (0,), (1,), (2,), (3,), (0, 1), (1, 2), (2, 3), (3, 4)]
-```
-
-Find subgroups of certain order:
-
-```python
->>> [print(subgroup) for subgroup in edp(z(4), u(8)).subgroups(order = 4)]
-...
-[(0, 1), (0, 3), (0, 5), (0, 7)]
-[(0, 1), (0, 3), (2, 1), (2, 3)]
-[(0, 1), (0, 3), (2, 5), (2, 7)]
-[(0, 1), (0, 5), (2, 1), (2, 5)]
-[(0, 1), (0, 5), (2, 3), (2, 7)]
-[(0, 1), (0, 7), (2, 1), (2, 7)]
-[(0, 1), (0, 7), (2, 3), (2, 5)]
-[(0, 1), (1, 1), (2, 1), (3, 1)]
-[(0, 1), (1, 3), (2, 1), (3, 3)]
-[(0, 1), (1, 5), (2, 1), (3, 5)]
-[(0, 1), (1, 7), (2, 1), (3, 7)]
-```
-
-Subgroups of EDP of `k4()` and `k4()`:
-
-```python
->>> len(edp(k4(), k4()).subgroups())
-67
+1        {0}
+2        {0, 4}
+2        {0, (0,)}
+2        {0, (1,)}
+2        {0, (2,)}
+2        {0, (3,)}
+2        {0, (0, 1)}
+2        {0, (1, 2)}
+2        {0, (2, 3)}
+2        {0, (3, 4)}
+4        {0, 2, 4, 6}
+4        {0, (0,), 4, (2,)}
+4        {0, (1,), (3,), 4}
+4        {0, (2, 3), 4, (0, 1)}
+4        {0, (1, 2), 4, (3, 4)}
+8        {0, 1, 2, 3, 4, 5, 6, 7}
+8        {0, 2, (2,), 4, 6, (1,), (0,), (3,)}
+8        {0, (0, 1), 2, (1, 2), 4, (3, 4), 6, (2, 3)}
+16       {0, 1, 2, 3, 4, 5, 6, 7, (2,), (0, 1), (1, 2), (3, 4), (2, 3), (1,), (0,), (3,)}
 ```
 
 List the cyclic subgroups of U<sub>30</sub> (see [this](https://math.stackexchange.com/questions/3390079/systematically-list-the-cyclic-subgroups-of-u30)):
@@ -196,12 +219,37 @@ List the cyclic subgroups of U<sub>30</sub> (see [this](https://math.stackexchan
 >>> for i in u30s:
 ...     if u(30).cyclic(i): print(i)
 ...
-[1]
-[1, 11]
-[1, 19]
-[1, 29]
-[1, 7, 13, 19]
-[1, 17, 19, 23]
+{1}
+{1, 11}
+{1, 19}
+{1, 29}
+{1, 19, 13, 7}
+{1, 19, 17, 23}
+```
+
+Find subgroups of certain order:
+
+```python
+>>> [print(subgroup) for subgroup in edp(z(4), u(8)).subgroups(order = 4)]
+...
+{(0, 1), (0, 7), (0, 3), (0, 5)}
+{(0, 1), (0, 3), (2, 3), (2, 1)}
+{(0, 1), (0, 3), (2, 5), (2, 7)}
+{(0, 1), (2, 5), (2, 1), (0, 5)}
+{(0, 1), (2, 3), (2, 7), (0, 5)}
+{(0, 1), (0, 7), (2, 1), (2, 7)}
+{(0, 1), (0, 7), (2, 5), (2, 3)}
+{(0, 1), (3, 1), (1, 1), (2, 1)}
+{(0, 1), (3, 3), (1, 3), (2, 1)}
+{(0, 1), (2, 1), (3, 5), (1, 5)}
+{(0, 1), (3, 7), (1, 7), (2, 1)}
+```
+
+Subgroups of EDP of `k4()` and `k4()`:
+
+```python
+>>> len(edp(k4(), k4()).subgroups())
+67
 ```
 
 Check a certain set is a subgroup or not using `check_subgroup()`:
@@ -213,4 +261,28 @@ True
 False
 ```
 
-Thank you for reading this far!
+### Subgroups: Normal
+
+Get cosets generated by elements:
+
+```python
+>>> e = edp(u(8), k4())
+>>> s = e.subgroups()[3] # get any subgroup
+>>> e.coset(s, (3, "b")) # (left) coset of element (3, "b") in subgroup s
+{(3, 'a'), (3, 'b')}
+>>> e.coset(s, (3, "b"), "r")
+{(3, 'b'), (3, 'a')} # right coset
+```
+
+Normal subgroups of a group:
+
+```python
+>>> for i in dihedral(5).nsubgroups():
+...     print(i)
+...
+{0}
+{0, 1, 2, 3, 4}
+{0, 1, 2, 3, 4, (2,), (4,), (1,), (0,), (3,)}
+```
+
+and countless other things if we are innovative enough! Thank you for reading this far.
