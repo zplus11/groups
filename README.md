@@ -106,7 +106,7 @@ Form External Direct Products:
 ```python
 >>> edp1 = edp(z(12), u(20), q8())
 >>> len(edp1.members) # = 12 * 8 * 8
-96
+768
 ```
 
 and perform component wise operations
