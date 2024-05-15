@@ -13,14 +13,14 @@ class u(group):
         assert n >= 1, "n need be >= 1"
 
         self.n = n
-        self.members += list(filter(self.__iscoprime, range(n)))
+        self.members = list(filter(self.__iscoprime, range(n)))
 
         super().__init__(1, self.members)
 
     def apply(self, *args):
         """
         Applies given operations to the identity and returns
-        final image
+        final image.
         """
         
         for operation in args:

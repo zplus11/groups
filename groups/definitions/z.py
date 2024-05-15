@@ -13,14 +13,14 @@ class z(group):
         assert n >= 1, "n need be >= 1"
 
         self.n = n
-        self.members += list(range(n))
+        self.members = list(range(n))
         
-        super().__init__(0)
+        super().__init__(0, self.members)
 
     def apply(self, *args):
         """
         Applies given operations to the identity and returns
-        final image
+        final image.
         """
         
         for operation in args:

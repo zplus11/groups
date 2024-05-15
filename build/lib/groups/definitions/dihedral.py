@@ -7,7 +7,7 @@ class dihedral(group):
     """Group of symmetries of a regular polygon."""
     
     def __init__(self, sides: int = 3):
-        """Initialises dihedral group for an n-sided polygon"""
+        """Initialises dihedral group for an n-sided polygon."""
         
         assert type(sides) == int, "sides need be numeric"
         assert sides >= 3, "sides need be >= 3"
@@ -36,7 +36,7 @@ class dihedral(group):
     def apply(self, *operations):
         """
         Applies given operations to the identity and returns
-        final image
+        final image.
         """
 
         # confirming each operation is a group member
@@ -62,7 +62,7 @@ class dihedral(group):
 
     # Rotation algorithm
     def __rotate(self, degree: int = 0):
-        """Applies the unit rotation given number of times"""
+        """Applies the unit rotation given number of times."""
 
         # We make a copy of the current image and change this copy
         # accordingly. To n rotations, the vertices at k index will be
@@ -76,7 +76,7 @@ class dihedral(group):
 
     # Reflecting about a vertex
     def __reflect_from_v(self, vertex: tuple = (0, )):
-        """Applies the reflection about given vertex"""
+        """Applies the reflection about given vertex."""
 
         # It works.
         temp = self.__temp()
@@ -89,7 +89,7 @@ class dihedral(group):
 
     # Reflecting between two vertices
     def __reflect_from_m_to_m(self, vertex: tuple = (0, 1)):
-        """Applies the reflection between two given vertices"""
+        """Applies the reflection between two given vertices."""
 
         # It works too.
         temp = self.__temp()

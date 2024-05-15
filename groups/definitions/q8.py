@@ -9,7 +9,7 @@ class q8(group):
     def __init__(self):
         """Initialises Q_8 group."""
         
-        self.members += ["1", "-1", "i", "-i", "j", "-j", "k", "-k"]
+        self.members = ["1", "-1", "i", "-i", "j", "-j", "k", "-k"]
         # Here, we define the group operations table rigorously.
         # Essentially, this is a group definition by the Cayley
         # Table.
@@ -30,7 +30,7 @@ class q8(group):
     def apply(self, *args):
         """
         Applies given operations to the identity and returns
-        final image
+        final image.
         """
         
         for operation in args:

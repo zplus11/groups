@@ -28,7 +28,7 @@ class edp(group):
     def apply(self, *operations):
         """
         Applies given operations to the identity and returns
-        final image
+        final image.
         """
 
         # confirming validity of each operation

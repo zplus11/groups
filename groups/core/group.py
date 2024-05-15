@@ -63,7 +63,7 @@ class group:
         print("-"*len(header))
         print(header, end = "\n\n")
         for i in self.members:
-            print(str(conversion[i]), end = "  | ")
+            print(str(conversion[i]), end = "    ")
             print(" | ".join(list(str(conversion[self.determine(self.apply(i, j))]) for j in self.members)))
 
     # Subgroups space

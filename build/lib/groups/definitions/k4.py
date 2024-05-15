@@ -9,7 +9,7 @@ class k4(group):
     def __init__(self):
         "Initialises K_4 group."""
         
-        self.members += ["e", "a", "b", "c"]
+        self.members = ["e", "a", "b", "c"]
         # Here, we define the group operations table rigorously.
         # Essentially, this is a group definition by the Cayley
         # Table.
@@ -25,7 +25,7 @@ class k4(group):
     def apply(self, *args):
         """
         Applies given operations to the identity and returns
-        final image
+        final image.
         """
         
         for operation in args:
