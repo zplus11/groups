@@ -1,8 +1,14 @@
 import setuptools
 
+import os
+current_dir = dir_setup = os.path.dirname(os.path.realpath(__file__))
+with open(os.path.join(dir_setup, "groups", "version.py")) as f:
+    exec(f.read())
+del os
+
 setuptools.setup(
     name = "groups",
-    version = "1.3.0",
+    version = __version__,
     author = "Naman Taggar",
     description = "Study select groups in python",
     long_description = open("README.md").read(),

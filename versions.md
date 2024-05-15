@@ -30,3 +30,6 @@ Restructured a lot of things, shifting general methods such as `subgroups()` or 
 #### v1.3.0 (28 Apr, 2024)
 - Add cosets and normal subgroups
 - Other changes, e.g. now subgroups are in set() type rather than list() (why?)
+
+#### v1.4.0 (15 May, 2024)
+- Better organisation and commenting of the code
