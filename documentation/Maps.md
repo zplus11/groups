@@ -66,7 +66,7 @@ Another homomorphism from *D*<sub>3</sub> to *Z*<sub>2</sub> that maps rotations
 𝜙: G({0}) --> G({0})
 ```
 
-- Inner Automorphisms: An automorphism induced by an element
+- Inner Automorphisms: An Automorphism induced by an element
 
 Inner automorphisms are induced by an element. The map is defined by phi(*x*) = *axa*^(-1) for some *a* in the group. For example:
 

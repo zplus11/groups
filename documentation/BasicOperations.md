@@ -1,5 +1,6 @@
 
 [Next - Subgroups](Subgroups.md)
+
 [Previous - Introduction](Introduction.md)
 
 ### Basic Operations
@@ -125,4 +126,5 @@ s5 	 s5 	 2
 <br>
 
 [Next - Subgroups](Subgroups.md)
+
 [Previous - Introduction](Introduction.md)

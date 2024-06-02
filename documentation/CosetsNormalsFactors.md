@@ -1,5 +1,6 @@
 
 [Next - Maps](Maps.md)
+
 [Previous - Subgroups](Subgroups.md)
 
 ### Cosets, Normal Subgroups and Factor Groups
@@ -93,4 +94,5 @@ G({'r1', 'r0', 's0', 's1'})
 <br>
 
 [Next - Maps](Maps.md)
+
 [Previous - Subgroups](Subgroups.md)
