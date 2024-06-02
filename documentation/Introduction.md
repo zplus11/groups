@@ -1,16 +1,6 @@
-Metadata-Version: 2.1
-Name: groups
-Version: 1.4.0
-Summary: Study select groups in python
-Author: Naman Taggar
-Classifier: Programming Language :: Python :: 3
-Classifier: License :: OSI Approved :: MIT License
-Classifier: Operating System :: OS Independent
-Requires-Python: >3.5
-Description-Content-Type: text/markdown
-License-File: LICENSE
-
 # groups v1.4.0
+
+[Next - Basic Operations](BasicOperations.md)
 
 ## Introduction
 
@@ -18,22 +8,16 @@ License-File: LICENSE
 
 **Definition** *(Group)*. A group is a non-empty set in Mathematics, elements of which follow 4 properties namely Closure, Associativity, Existence of Identity and Existence of Inverses under a certain operation.
 
-Study finite group structures easily with python! This library contains various modules related to select group structures in Mathematics, some being `dihedral.py`, `z.py`, `edp.py`, and more. This is a work in continuous progress, and I hope to continue working on this and add many more groups gradually. This README file walks you through the available modules.
+Study finite group structures easily with python! This library contains various modules related to select group structures in Mathematics, some being `dihedral.py`, `z.py`, `edp.py`, and more. This is a work in continuous progress, and I hope to continue working on this and implement many more group functionalities gradually. This documentation walks you through the available modules.
 
-## Installation
-
-To install the library, run
-
-```
-pip install git+"https://github.com/zplus11/groups"
-```
+A group is defined in this library with 2 characteristics: the set of its members, and the function that defines how given group members are operated on the identity.
 
 ## Available Groups
 
 `groups` offers the following Groups:
 
 |Group|Class|Description|
-|-|-|-|------------|
+|-|-|------------|
 |Dihedral|`D(sides = 3)`|D<sub>n</sub> is the group of symmetries of a regular polygon. See [1] below.|
 |Addition modulo *n*|`Z(n = 1)`|*Z*<sub>n</sub> is the group {0, 1, ..., *n*-1} formed under addition modulo *n*.|
 |Multiplication modulo *n*|`U(n = 1)`|*U*<sub>n</sub> is the group {1 <= *x* < *n* : gcd(*n*, *x*) = 1} formed under multiplication modulo *n*.|
@@ -53,12 +37,16 @@ Assuming the current state of a square is `[1, 2, 3, 4]`, then applying 2 unit r
 - reflection about vertex at index *n*: denoted by `(n, )`;
 - reflection about axis passing between vertices at index *n* and *n + 1*: denoted by `(n, n+1)`.
 
-You can use that module to see how a polygon's vertices change upon applying various symmetries. Work will be continued on it.	âˆŽ
+You can use that module to see how a polygon's vertices change upon applying various symmetries. Work will be continued on it.	∎
 
 ## Library Usage
 
-See [this file]() to get a tour through the available modules in this package.
+Import the library by running
 
-## License
+```python
+>>> from groups import *
+```
 
-`groups` is licensed under the MIT License. See `License` for more details.
+<br>
+
+[Next - Basic Operations](BasicOperations.md)

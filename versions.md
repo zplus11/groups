@@ -29,7 +29,10 @@ Restructured a lot of things, shifting general methods such as `subgroups()` or 
 
 #### v1.3.0 (28 Apr, 2024)
 - Add cosets and normal subgroups
-- Other changes, e.g. now subgroups are in set() type rather than list() (why?)
+- Other changes, e.g. now subgroups are in set() type rather than list()
 
-#### v1.4.0 (15 May, 2024)
+#### v1.4.0 (31 May, 2024)
 - Better organisation and commenting of the code
+- Renaming modules to resemble standard notation; README.md reflects these changes
+- Add `G.generate()`, `G.factor_group()` (latter may be improved in future...)
+- Add `maps.py` defining types of morphisms; Work to be continued on it

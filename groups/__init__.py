@@ -8,19 +8,20 @@ to further it as much as I can.
 """
 
 from groups.version import __version__
-
-
-from groups.core import group
-from groups.definitions import dihedral, z, u, k4, q8, edp
-
+from groups.group import G
+from groups.definitions import D, Z, U, K4, Q8, EDP
+from groups.maps import Map, Homomorphism, Isomorphism, Automorphism, IAutomorphism
+from groups.symmetries import dihedral
 
 __all__ = [
     "__version__",
-    "group",
-    "dihedral", "z", "u", "k4", "q8",
-    "edp"
+    
+    "G",
+    "D", "Z", "U", "K4", "Q8",
+    "EDP",
+    "Map", "Homomorphism", "Isomorphism", "Automorphism", "IAutomorphism",
+    
+    "dihedral"
 ]
 
-__all__.extend(
-    ["core", "definitions"]
-)
+__all__.extend(["symmetries"])

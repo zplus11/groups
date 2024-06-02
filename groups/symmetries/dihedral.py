@@ -1,9 +1,6 @@
-# groups\definitions\dihedral.py
+# groups\symmetries\dihedral.py
 
-from groups.core import group
-
-
-class dihedral(group):
+class dihedral:
     """Group of symmetries of a regular polygon."""
     
     def __init__(self, sides: int = 3):
@@ -30,8 +27,9 @@ class dihedral(group):
             self.members += [(i, i + 1) for i in range(int(self.sides/2))]
         else:
             self.members += [(i,) for i in range(self.sides)]
-
-        super().__init__(0, self.members)
+        self.identity = 0
+        self.elements = {x: self.apply(x) for x in self.members}
+        
         
     def apply(self, *operations):
         """
