@@ -45,7 +45,7 @@ You can use that module to see how a polygon's vertices change upon applying var
 
 ## Library Usage
 
-See [this file]() to get a tour through the available modules in this package.
+See [this file](documentation/Introduction.md) to get a tour through the available modules in this package.
 
 ## License
 
