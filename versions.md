@@ -36,3 +36,7 @@ Restructured a lot of things, shifting general methods such as `subgroups()` or 
 - Renaming modules to resemble standard notation; README.md reflects these changes
 - Add `G.generate()`, `G.factor_group()` (latter may be improved in future...)
 - Add `maps.py` defining types of morphisms; Work to be continued on it
+
+#### v1.5.0 (11 Jun, 2024)
+- Add `documentation` directory
+- Add functionalities to `groups/symmetries/dihedral.py` making it a standalone sub-package

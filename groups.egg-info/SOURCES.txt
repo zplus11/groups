@@ -1,6 +1,14 @@
 LICENSE
+MANIFEST.in
 README.md
 setup.py
+documentation/BasicOperations.md
+documentation/CosetsNormalsFactors.md
+documentation/Dihedral.md
+documentation/Introduction.md
+documentation/Maps.md
+documentation/Subgroups.md
+documentation/assets/turtle1.png
 groups/__init__.py
 groups/definitions.py
 groups/group.py

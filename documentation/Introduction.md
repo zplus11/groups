@@ -25,19 +25,7 @@ A group is defined in this library with 2 characteristics: the set of its member
 |*Q*<sub>8</sub>|`Q8()`|Quaternion group.|
 |EDP|`EDP(G1, G2, ..., Gn)`|External Direct Product of groups.|
 
-[1]	The `symmetries\dihedral.py` module implements the idea of polygon symmetries using permutations. A polygon is defined with the following characteristics:
-- its number of sides;
-- its state: the current order of its vertices;
-- its symmetries: rotations union reflections.
-
-Assuming the current state of a square is `[1, 2, 3, 4]`, then applying 2 unit rotations will make this current state into `[3, 4, 1, 2]`. Similarly other rotations and reflections can be applied.
-
-**Nomenchlature.** The symmetries are named in a polygon as follows:
-- rotations of *n* units: denoted by `n`;
-- reflection about vertex at index *n*: denoted by `(n, )`;
-- reflection about axis passing between vertices at index *n* and *n + 1*: denoted by `(n, n+1)`.
-
-You can use that module to see how a polygon's vertices change upon applying various symmetries. Work will be continued on it.	∎
+[1]	The `groups\symmetries\dihedral.py` module implements the idea of polygon symmetries using permutations. See [this page](Dihedral.md) for more details.
 
 ## Library Usage
 

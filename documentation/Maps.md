@@ -1,4 +1,6 @@
 
+[Next - Dihedral](Dihedral.md)
+
 [Previous - Cosets, Normal Subgroups & Factor Groups](CosetsNormalsFactors.md)
 
 ### Maps
@@ -9,7 +11,7 @@ A map from a group *G*<sub>1</sub> to another group *G*<sub>2</sub> is a definit
 >>> f = lambda x: x%2
 >>> m = Map(Z(20), Z(2), f)
 >>> m
-𝜙: G({0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19}) --> G({0, 1})
+??: G({0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19}) --> G({0, 1})
 >>> m(15)
 1
 >>> m(4)
@@ -43,7 +45,7 @@ Another homomorphism from *D*<sub>3</sub> to *Z*<sub>2</sub> that maps rotations
 ```python
 >>> phi = Homomorphism(D(3), Z(2), lambda x: 0 if x.startswith("r") else 1)
 >>> phi
-𝜙: G({'r2', 's1', 'r1', 's2', 's0', 'r0'}) --> G({0, 1})
+??: G({'r2', 's1', 'r1', 's2', 's0', 'r0'}) --> G({0, 1})
 >>> phi.kernal()
 {'r2', 'r1', 'r0'}
 ```
@@ -56,14 +58,14 @@ Another homomorphism from *D*<sub>3</sub> to *Z*<sub>2</sub> that maps rotations
 >>> g = G({0}, lambda *x: sum(x))
 >>> f = lambda x: x
 >>> Isomorphism(g, g, f)
-𝜙: G({0}) --> G({0})
+??: G({0}) --> G({0})
 ```
 
 - Automorphisms: An Isomorphism from a group to itself
 
 ```python
 >>> Automorphism(g, f)
-𝜙: G({0}) --> G({0})
+??: G({0}) --> G({0})
 ```
 
 - Inner Automorphisms: An Automorphism induced by an element
@@ -86,5 +88,7 @@ Inner automorphisms are induced by an element. The map is defined by phi(*x*) = 
 *... and countless other things are possible if we are innovative enough!.*
 
 <br>
+
+[Next - Dihedral](Dihedral.md)
 
 [Previous - Cosets, Normal Subgroups & Factor Groups](CosetsNormalsFactors.md)

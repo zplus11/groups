@@ -1,5 +1,5 @@
 # groups\symmetries\__init__.py
 
-from .dihedral import dihedral
+from .dihedral import Dihedral
 
-__all__ = ["dihedral"]
+__all__ = ["Dihedral"]
