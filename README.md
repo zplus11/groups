@@ -6,7 +6,7 @@
 
 **Definition** *(Group)*. A group is a non-empty set in Mathematics, elements of which follow 4 properties namely Closure, Associativity, Existence of Identity and Existence of Inverses under a certain operation.
 
-Study finite group structures easily with python! This library contains various modules related to select group structures in Mathematics, some being `dihedral.py`, `z.py`, `edp.py`, and more. This is a work in continuous progress, and I hope to continue working on this and add many more groups gradually. This README file walks you through the available modules.
+Study finite group structures easily with python! This library contains various modules related to select group structures in Mathematics. This is a work in continuous progress, and I hope to continue working on this and add many more groups gradually. This README file walks you through the available modules.
 
 ## Installation
 

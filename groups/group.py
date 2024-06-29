@@ -83,35 +83,19 @@ class G:
     def abelian(self, sub = None):
         """Checks whether the group is abelian or not."""
         
-        members = self
-        # if a particular subgroup is to be checked
-        if sub is not None:
-            if isinstance(sub, G): members = sub.members
-            else:
-                assert type(sub) in [list, tuple, set], f"Invalid type {type(sub)} of {sub}"
-                members = sub
-                for member in members:
-                    assert member in self, f"Invalid subgroup element {member}"
+        if sub is None: sub = self
         # checking commutativity for the required members
-        if any(self.apply(a, b) != self.apply(b, a) for a in members for b in members):
+        if any(self.apply(a, b) != self.apply(b, a) for a in sub for b in sub):
             return False
         return True
 
     def cyclic(self, sub = None):
         """Checks whether the group is cyclic or not."""
         
-        members = self
-        # if a particular subgroup is to be checked
-        if sub is not None:
-            if isinstance(sub, G): members = sub.members
-            else:
-                assert type(sub) in [list, tuple, set], f"Invalid type {type(sub)} of {sub}"
-                members = sub
-                for member in members:
-                    assert member in self, f"Invalid subgroup element {member}"
+        if sub is None: sub = self
         # checking if |a| == |G| for any a in G
-        for a in members:
-            if self.order(a) == len(members):
+        for a in sub:
+            if self.order(a) == len(sub):
                 return (True, a)
         return False
 
@@ -196,9 +180,9 @@ class G:
         # set to "r" in arguments to receive right coset.
         assert orientation in ["l", "r"], f"Unrecognised orientation {orientation}"
         if orientation == "l":
-            return set(self.apply(element, x) for x in subgroup.members)
+            return set(self.apply(element, x) for x in subgroup)
         else:
-            return set(self.apply(x, element) for x in subgroup.members)
+            return set(self.apply(x, element) for x in subgroup)
 
     def cosets(self, subgroup):
         """Returns all distinct cosets of a subgroup in the group."""
